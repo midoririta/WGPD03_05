@@ -27,6 +27,7 @@ var res = {
     s1_plist : "res/s1.plist",
     s1_png : "res/s1.png",
     bg: "res/bg.jpg",
+    box: "res/box.png",
     win : "res/win.wav",
     lose : "res/lose.wav",
     s1_0025_png : "res/s1_0025.png",
