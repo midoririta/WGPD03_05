@@ -13,11 +13,13 @@ var Item8Layer = cc.Layer.extend({
 
         var item1 = new cc.MenuItemFont('test1',this.item1,this);
         var item2 = new cc.MenuItemFont('test2',this.item2,this);
+        var item3 = new cc.MenuItemFont('test3',this.item3,this);
 
         item1.attr({x:-400,y:240});
         item2.attr({x:-320,y:240});
+        item3.attr({x:-240,y:240});
 
-        var menu = new cc.Menu(item1,item2);
+        var menu = new cc.Menu(item1,item2,item3);
         this.addChild(menu);
 
         cc.spriteFrameCache.addSpriteFrames(res.s1_plist,res.s1_png);
@@ -51,6 +53,30 @@ var Item8Layer = cc.Layer.extend({
     },
     item2: function () {
         this.sprite.stopAction(this.a1); //control stop action or animation
+    },
+    item3: function () {
+        var moveLeftTop = cc.moveTo(0.5,
+            this.sprite.x, cc.winSize.height-this.sprite.height/2
+        );
+        var moveRightTop = cc.moveTo(0.5,
+            cc.winSize.width-this.sprite.width/2,
+            cc.winSize.height-this.sprite.height/2
+        );
+        var moveRightBottom = cc.moveTo(0.5,
+            cc.winSize.width-this.sprite.width/2,
+            this.sprite.height/2
+        );
+        var moveLeftBottom = cc.moveTo(0.5,
+            this.sprite.width/2,
+            this.sprite.height/2
+        );
+        var moveCenter = cc.moveTo(0.5,
+            cc.winSize.width/2,
+            cc.winSize.height/2
+        );
+        var moves = [moveLeftTop,moveRightTop,moveRightBottom,moveLeftBottom,moveCenter];
+        var acts = new cc.Sequence(moves);
+        this.sprite.runAction(acts);
     },
 
     update: function () {
