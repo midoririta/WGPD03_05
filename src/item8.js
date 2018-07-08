@@ -152,6 +152,7 @@ var Item8Layer = cc.Layer.extend({
 
         // var ff = cc.Follow.create(this.sprite);
         // this.hello.runAction(ff);
+        this.sprite.runAction(cc.jumpTo(1,cc.p(this.sprite.x,this.sprite.y),150,2));
 
         cc.audioEngine.playMusic(res.win, false);
 
