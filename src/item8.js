@@ -14,12 +14,14 @@ var Item8Layer = cc.Layer.extend({
         var item1 = new cc.MenuItemFont('test1',this.item1,this);
         var item2 = new cc.MenuItemFont('test2',this.item2,this);
         var item3 = new cc.MenuItemFont('test3',this.item3,this);
+        var item4 = new cc.MenuItemFont('test4',this.item4,this);
 
         item1.attr({x:-400,y:240});
         item2.attr({x:-320,y:240});
         item3.attr({x:-240,y:240});
+        item4.attr({x:-160,y:240});
 
-        var menu = new cc.Menu(item1,item2,item3);
+        var menu = new cc.Menu(item1,item2,item3,item4);
         this.addChild(menu);
 
         cc.spriteFrameCache.addSpriteFrames(res.s1_plist,res.s1_png);
@@ -77,6 +79,40 @@ var Item8Layer = cc.Layer.extend({
         var moves = [moveLeftTop,moveRightTop,moveRightBottom,moveLeftBottom,moveCenter];
         var acts = new cc.Sequence(moves);
         this.sprite.runAction(acts);
+    },
+    item4: function () {
+        var moveLeftTop = cc.moveTo(0.5,
+            this.sprite.x, cc.winSize.height-this.sprite.height/2
+        );
+        var i1 = new cc.CallFunc(this.f1, this, "1");
+        var moveRightTop = cc.moveTo(0.5,
+            cc.winSize.width-this.sprite.width/2,
+            cc.winSize.height-this.sprite.height/2
+        );
+        var i2 = new cc.CallFunc(this.f1, this, "2");
+        var moveRightBottom = cc.moveTo(0.5,
+            cc.winSize.width-this.sprite.width/2,
+            this.sprite.height/2
+        );
+        var i3 = new cc.CallFunc(this.f1 ,this, "3");
+        var moveLeftBottom = cc.moveTo(0.5,
+            this.sprite.width/2,
+            this.sprite.height/2
+        );
+        var i4 = new cc.CallFunc(this.f1, this, "4");
+        var moveCenter = cc.moveTo(0.5,
+            cc.winSize.width/2,
+            cc.winSize.height/2
+        );
+        var moves = [moveLeftTop,i1,moveRightTop,i2,moveRightBottom,i3,moveLeftBottom,i4,moveCenter];
+        var acts = new cc.Sequence(moves);
+        this.sprite.runAction(acts);
+    },
+    f1: function(who, mesg){
+        cc.log("f1" + mesg);
+        if(mesg == '2'){
+            this.sprite.stopAction(this.a2);
+        }
     },
 
     update: function () {
