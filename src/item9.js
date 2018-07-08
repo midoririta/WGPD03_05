@@ -29,10 +29,53 @@ var Item9Layer = cc.Layer.extend({
 
         for (var i=0; i<walls.length; i++){
             var wall = walls[i];
-            wall.setElasticity(0.5); //彈性
-            wall.setFriction(10);    //摩擦係數
+            wall.setElasticity(0.8); //彈性
+            wall.setFriction(0.2);    //摩擦係數
             this.space.addStaticShape(wall);
         }
+        var stick = new cc.DrawNode();
+        stick.drawSegment(cc.p(cc.winSize.width/2, cc.winSize.height/2),
+            cc.p(cc.winSize.width/2,0),
+            4, cc.color(255,0,0));
+        this.addChild(stick);
+
+        var staticBody2 = this.space.staticBody;
+        var shape2 = new cp.SegmentShape(staticBody2,
+            cp.v(cc.winSize.width/2, cc.winSize.height/2),
+            cp.v(cc.winSize.width/2, 0), 4);
+        shape2.setElasticity(0.5); //彈性
+        shape2.setFriction(10);    //摩擦係數
+        this.space.addStaticShape(shape2);
+
+        var stick3 = new cc.DrawNode();
+        stick3.drawSegment(cc.p(cc.winSize.width/2 + 200, cc.winSize.height/2),
+            cc.p(cc.winSize.width,cc.winSize.height/2),
+            4, cc.color(0,255,0));
+        this.addChild(stick3);
+
+        var staticBody3 = this.space.staticBody;
+        var shape3 = new cp.SegmentShape(staticBody3,
+            cp.v(cc.winSize.width/2+200, cc.winSize.height/2),
+            cp.v(cc.winSize.width,cc.winSize.height/2)
+            ,4);
+        shape3.setElasticity(0.5); //彈性
+        shape3.setFriction(10);    //摩擦係數
+        this.space.addStaticShape(shape3);
+
+        var stick4 = new cc.DrawNode();
+        stick4.drawSegment(cc.p(cc.winSize.width/2, cc.winSize.height/2),
+            cc.p(0,0),
+            4, cc.color(0,0,255));
+        this.addChild(stick4);
+
+        var staticBody4 = this.space.staticBody;
+        var shape4 = new cp.SegmentShape(staticBody4,
+            cp.v(cc.winSize.width/2, cc.winSize.height/2),
+            cp.v(0,0)
+            ,4);
+        shape4.setElasticity(0.5); //彈性
+        shape4.setFriction(0);    //摩擦係數
+        this.space.addStaticShape(shape4);
     },
 
     setUpmymouse: function(layer){
