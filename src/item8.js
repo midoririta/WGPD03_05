@@ -108,10 +108,11 @@ var Item8Layer = cc.Layer.extend({
         var acts = new cc.Sequence(moves);
         this.sprite.runAction(acts);
     },
-    f1: function(who, mesg){
-        cc.log("f1" + mesg);
+    f1: function(target, mesg){
+        //target is a action node == sprite
+
         if(mesg == '2'){
-            this.sprite.stopAction(this.a2);
+            target.stopAction(target.getParent().a2);
         }
     },
 
