@@ -26,6 +26,9 @@ var res = {
     HelloWorld_png : "res/HelloWorld.png",
     s1_plist : "res/s1.plist",
     s1_png : "res/s1.png",
+    bg: "res/bg.jpg",
+    win : "res/win.wav",
+    lose : "res/lose.wav",
     s1_0025_png : "res/s1_0025.png",
 };
 

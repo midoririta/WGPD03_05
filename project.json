@@ -15,6 +15,7 @@
         "src/resource.js",
         "src/menu.js",
         "src/item8.js",
+        "src/item9.js",
         "src/app.js"
     ]
 }

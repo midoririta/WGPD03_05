@@ -4,8 +4,17 @@ var Item8Layer = cc.Layer.extend({
     counter:0,
     a1: null,
     a2: null,
+    isBigger: false,
+    isFadeIn: false,
+    hello: null,
     ctor: async function () {
         this._super();
+
+        this.hello = new cc.Sprite(res.bg);
+        this.hello.attr({x:cc.winSize.width/2 , y:cc.winSize.height/2});
+        this.addChild(this.hello);
+        //this.hello.scaleX(2);
+        //this.hello.scaleY(2);
 
         this.sprite = new cc.Sprite(res.s1_0025_png);
         this.sprite.attr({x:cc.winSize.width/2, y:cc.winSize.height/2});
@@ -15,13 +24,23 @@ var Item8Layer = cc.Layer.extend({
         var item2 = new cc.MenuItemFont('test2',this.item2,this);
         var item3 = new cc.MenuItemFont('test3',this.item3,this);
         var item4 = new cc.MenuItemFont('test4',this.item4,this);
+        var item5 = new cc.MenuItemFont('test5',this.item5,this);
+        var item6 = new cc.MenuItemFont('test6',this.item6,this);
+        var item7 = new cc.MenuItemFont('test7',this.item7,this);
 
         item1.attr({x:-400,y:240});
         item2.attr({x:-320,y:240});
         item3.attr({x:-240,y:240});
         item4.attr({x:-160,y:240});
+        item5.attr({x:-80,y:240});
+        item6.attr({x:0,y:240});
+        item7.attr({x:80,y:240});
 
-        var menu = new cc.Menu(item1,item2,item3,item4);
+        var menu = new cc.Menu(item1,item2,item3,item4,item5,item6,item7);
+
+
+
+
         this.addChild(menu);
 
         cc.spriteFrameCache.addSpriteFrames(res.s1_plist,res.s1_png);
@@ -90,6 +109,7 @@ var Item8Layer = cc.Layer.extend({
             cc.winSize.height-this.sprite.height/2
         );
         var i2 = new cc.CallFunc(this.f1, this, "2");
+        var dd = new cc.DelayTime(2);
         var moveRightBottom = cc.moveTo(0.5,
             cc.winSize.width-this.sprite.width/2,
             this.sprite.height/2
@@ -104,9 +124,37 @@ var Item8Layer = cc.Layer.extend({
             cc.winSize.width/2,
             cc.winSize.height/2
         );
-        var moves = [moveLeftTop,i1,moveRightTop,i2,moveRightBottom,i3,moveLeftBottom,i4,moveCenter];
+        var moves = [moveLeftTop,i1,moveRightTop,i2,dd,moveRightBottom,i3,moveLeftBottom,i4,moveCenter];
         var acts = new cc.Sequence(moves);
         this.sprite.runAction(acts);
+    },
+    item5: function(){
+        this.isBig = !this.isBig;
+        var ab = new cc.ScaleBy(0.5,2,2);
+        var as = new cc.ScaleBy(0.5,0.5,0.5);
+        this.sprite.runAction(this.isBig?ab:as);
+
+    },
+    item6: function(){
+        this.isFadIn = !this.isFadIn;
+        var ii = new cc.FadeIn(1);
+        var out = new cc.FadeOut(0.5);
+        this.sprite.runAction(this.isFadIn?ii:out);
+    },
+    item7: function(){
+        //this.sprite.runAction(new cc.Blink(1,10));
+        //this.sprite.runAction(new cc.TintBy(1,255,255,0));
+
+        // var a3 = cc.moveBy(2, 400, 400);
+        // var a4 = new cc.EaseIn(a3, 20); //加速度
+        // var a5 = new cc.Speed(a3, 4); //4倍
+        // this.sprite.runAction(a5);
+
+        // var ff = cc.Follow.create(this.sprite);
+        // this.hello.runAction(ff);
+
+        cc.audioEngine.playMusic(res.win, false);
+
     },
     f1: function(target, mesg){
         //target is a action node == sprite

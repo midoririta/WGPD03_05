@@ -19,6 +19,7 @@ var MenuLayer = cc.Layer.extend({
         var item6 = new cc.MenuItemFont('test6',this.item6,this);
         var item7 = new cc.MenuItemFont('test7',this.item7,this);
         var item8 = new cc.MenuItemFont('test8',this.item8,this);
+        var item9 = new cc.MenuItemFont('test9',this.item9,this);
 
         item1.attr({x:-240,y:-200});
         item2.attr({x:-160,y:-200});
@@ -29,9 +30,10 @@ var MenuLayer = cc.Layer.extend({
 
         item7.attr({x:-240,y:-240});
         item8.attr({x:-160,y:-240});
+        item9.attr({x:-80,y:-240});
 
         var menu = new cc.Menu(item1,item2,item3,item4,item5,item6,
-            item7,item8);
+            item7,item8,item9);
         this.addChild(menu);
 
         return true;
@@ -94,6 +96,9 @@ var MenuLayer = cc.Layer.extend({
     },
     item8: function () {
         cc.director.pushScene(new Item8Scene());
+    },
+    item9: function(){
+        cc.director.pushScene(new Item9Scene());
     },
 
 });
